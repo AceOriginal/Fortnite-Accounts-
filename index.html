@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up / Sign In</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: url('background.gif') no-repeat center center fixed;
+            background-size: cover;
+        }
+
+        .form-container {
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.7);
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            color: white;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .eye-icon {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            font-size: 18px;
+            color: #000;
+        }
+
+        .password-container {
+            position: relative;
+        }
+
+        p {
+            text-align: center;
+        }
+
+        a {
+            color: #4CAF50;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .form-toggle {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .form-toggle a {
+            color: #fff;
+            font-weight: bold;
+        }
+
+        .form-toggle a:hover {
+            text-decoration: underline;
+        }
+
+        .char-count {
+            font-size: 12px;
+            color: #ddd;
+            text-align: right;
+        }
+
+        .form-error {
+            font-size: 12px;
+            color: red;
+            text-align: left;
+        }
+
+        #profilePage {
+            display: none;
+            padding: 20px;
+            height: 100vh;
+            overflow-y: scroll;
+            background: url('background2.gif') no-repeat center center fixed;
+            background-size: cover;
+            position: relative;
+        }
+
+        #profileName {
+            font-size: 20px;
+            color: white;
+            font-weight: bold;
+            text-transform: lowercase;
+            margin-left: 15px;
+            margin-top: 10px;
+        }
+
+        .profile-container {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            position: absolute;
+            top: 20px;
+            left: 20px;
+        }
+
+        .profile-picture {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background-color: #4CAF50;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            overflow: hidden;
+            position: relative;
+            border: 3px solid #fff;
+            color: white;
+            font-size: 30px;
+            font-weight: bold;
+        }
+
+        .profile-picture img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        #fileInput {
+            display: none;
+        }
+
+        .upload-btn {
+            margin-top: 10px;
+            padding: 8px 15px;
+            background-color: #4CAF50;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .upload-btn:hover {
+            background-color: #45a049;
+        }
+
+        /* Ρυθμίσεις (settings) */
+        .settings-container {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 25px;
+            color: white;
+        }
+
+        /* Λογότυπο */
+        .logo-container {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            color: white;
+            font-size: 25px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Sign In Form -->
+    <div class="form-container" id="signInFormContainer">
+        <h2>Sign In</h2>
+        <form id="signinForm">
+            <div class="input-group">
+                <label for="signinEmail">Email</label>
+                <input type="email" id="signinEmail" name="signinEmail" placeholder="Enter your email" required>
+            </div>
+            <div class="input-group">
+                <label for="signinPassword">Password (min 10 characters)</label>
+                <div class="password-container">
+                    <input type="password" id="signinPassword" name="signinPassword" placeholder="Enter your password" required minlength="10">
+                    <span class="eye-icon" id="toggleSigninPassword" onclick="togglePassword('signinPassword')"><i class="fas fa-eye"></i></span>
+                </div>
+                <div class="form-error" id="signinPasswordError"></div>
+            </div>
+            <button type="submit" onclick="signIn(event)">Sign In</button>
+        </form>
+
+        <div class="form-toggle">
+            <p>Don't have an account? <a href="#" onclick="showSignUpForm()">Sign Up</a></p>
+        </div>
+    </div>
+
+    <!-- Sign Up Form -->
+    <div class="form-container" id="signUpFormContainer" style="display: none;">
+        <h2>Sign Up</h2>
+        <form id="signupForm">
+            <div class="input-group">
+                <label for="username">Username (4-15 characters)</label>
+                <input type="text" id="username" name="username" placeholder="Enter your username" required minlength="4" maxlength="15" oninput="updateUsernameCharCount()">
+                <div class="char-count" id="usernameCharCount">0/15</div>
+                <div class="form-error" id="usernameError"></div>
+            </div>
+            <div class="input-group">
+                <label for="signupEmail">Email</label>
+                <input type="email" id="signupEmail" name="signupEmail" placeholder="Enter your email" required>
+            </div>
+            <div class="input-group">
+                <label for="signupPassword">Password (min 10 characters)</label>
+                <div class="password-container">
+                    <input type="password" id="signupPassword" name="signupPassword" placeholder="Enter your password" required minlength="10">
+                    <span class="eye-icon" id="toggleSignupPassword" onclick="togglePassword('signupPassword')"><i class="fas fa-eye"></i></span>
+                </div>
+                <div class="form-error" id="signupPasswordError"></div>
+            </div>
+            <div class="input-group">
+                <label for="confirmPassword">Confirm Password</label>
+                <div class="password-container">
+                    <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm your password" required minlength="10">
+                    <span class="eye-icon" id="toggleConfirmPassword" onclick="togglePassword('confirmPassword')"><i class="fas fa-eye"></i></span>
+                </div>
+                <div class="form-error" id="confirmPasswordError"></div>
+            </div>
+            <button type="submit" onclick="signUp(event)">Sign Up</button>
+        </form>
+
+        <div class="form-toggle">
+            <p>Already have an account? <a href="#" onclick="showSignInForm()">Sign In</a></p>
+        </div>
+    </div>
+
+    <!-- Profile Page -->
+    <div id="profilePage">
+        <!-- Ρυθμίσεις (Settings) -->
+        <div class="settings-container" onclick="toggleSettings()">
+            <i class="fas fa-cogs"></i>
+        </div>
+
+        <div class="profile-container">
+            <div class="profile-picture" id="profilePicture" onclick="document.getElementById('fileInput').click();">
+                <span id="profileInitial">A</span>
+            </div>
+            <div>
+                <span id="profileName"></span>
+            </div>
+        </div>
+
+        <input type="file" id="fileInput" accept="image/*" onchange="showImageInCircle(event)">
+    </div>
+
+    <script>
+        function showSignUpForm() {
+            document.getElementById("signInFormContainer").style.display = "none";
+            document.getElementById("signUpFormContainer").style.display = "block";
+        }
+
+        function showSignInForm() {
+            document.getElementById("signInFormContainer").style.display = "block";
+            document.getElementById("signUpFormContainer").style.display = "none";
+        }
+
+        function togglePassword(id) {
+            var passwordField = document.getElementById(id);
+            var eyeIcon = document.getElementById('toggle' + id.charAt(0).toUpperCase() + id.slice(1));
+            if (passwordField.type === "password") {
+                passwordField.type = "text";
+                eyeIcon.innerHTML = '<i class="fas fa-eye-slash"></i>';
+            } else {
+                passwordField.type = "password";
+                eyeIcon.innerHTML = '<i class="fas fa-eye"></i>';
+            }
+        }
+
+        function signUp(event) {
+            event.preventDefault();
+            const username = document.getElementById("username").value;
+            const email = document.getElementById("signupEmail").value;
+            const password = document.getElementById("signupPassword").value;
+            const confirmPassword = document.getElementById("confirmPassword").value;
+
+            let valid = true;
+
+            if (username.length < 4 || username.length > 15) {
+                document.getElementById("usernameError").textContent = "Username must be between 4 and 15 characters.";
+                valid = false;
+            } else {
+                document.getElementById("usernameError").textContent = "";
+            }
+
+            if (password.length < 10) {
+                document.getElementById("signupPasswordError").textContent = "Password must be at least 10 characters.";
+                valid = false;
+            } else {
+                document.getElementById("signupPasswordError").textContent = "";
+            }
+
+            if (confirmPassword !== password) {
+                document.getElementById("confirmPasswordError").textContent = "Passwords do not match.";
+                valid = false;
+            } else {
+                document.getElementById("confirmPasswordError").textContent = "";
+            }
+
+            if (!valid) return;
+
+            localStorage.setItem("username", username);
+            localStorage.setItem("email", email);
+            localStorage.setItem("password", password);
+
+            alert("Account created successfully!");
+            showSignInForm();
+        }
+
+        function signIn(event) {
+            event.preventDefault();
+            const email = document.getElementById("signinEmail").value;
+            const password = document.getElementById("signinPassword").value;
+
+            const storedEmail = localStorage.getItem("email");
+            const storedPassword = localStorage.getItem("password");
+
+            if (email === storedEmail && password === storedPassword) {
+                document.getElementById("signInFormContainer").style.display = "none";
+                document.getElementById("profilePage").style.display = "block";
+            } else {
+                alert("Invalid credentials. Please try again.");
+            }
+        }
+
+        function toggleSettings() {
+            // No action on settings click anymore
+        }
+
+        function showImageInCircle(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const img = new Image();
+                    img.src = e.target.result;
+                    img.onload = function() {
+                        document.getElementById('profilePicture').innerHTML = '';
+                        const profilePic = document.createElement('img');
+                        profilePic.src = e.target.result;
+                        document.getElementById('profilePicture').appendChild(profilePic);
+                    };
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        window.onload = function() {
+            const username = localStorage.getItem('username');
+            if (username) {
+                document.getElementById('profileName').textContent = username;
+            }
+        };
+    </script>
+</body>
+</html>
