@@ -1,1 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Portfolio - AceOfficial</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    /* Basic Styles */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Fredoka One', sans-serif;
+      color: #333;
+      overflow-x: hidden;
+      height: 100%;
+      background-image: url('background.gif');
+      background-size: cover;
+      background-position: center;
+      position: relative;
+    }
 
+    /* Header Section */
+    header {
+      color: #fff;
+      padding: 50px 0;
+      text-align: center;
+      position: relative;
+      animation: fadeInHeader 1.5s ease-out;
+    }
+
+    header h1 {
+      font-size: 3rem;
+      margin: 0;
+      animation: fadeInText 2s ease-in-out;
+    }
+
+    header h2 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #ffcc00;
+      animation: fadeInText 2s ease-in-out 0.5s;
+    }
+
+    header h2 i {
+      font-size: 2.5rem;
+      color: #ffcc00;
+    }
+
+    /* Hero Section */
+    .hero-section {
+      position: relative;
+      height: 100vh;
+      color: white;
+      text-align: center;
+    }
+
+    .hero-content {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      padding: 20px;
+    }
+
+    .hero-content h1 {
+      font-size: 4rem;
+      animation: zoomInText 2s ease-in-out;
+    }
+
+    .hero-content p {
+      font-size: 1.5rem;
+      margin-top: 10px;
+      animation: fadeInText 2s ease-in-out 0.5s;
+    }
+
+    .profile-img {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      margin-top: 20px;
+      border: 3px solid white;
+      animation: fadeIn 3s ease-in-out 1s;
+    }
+
+    /* Section Styles */
+    .section {
+      padding: 80px 0;
+      text-align: center;
+      border-top: 1px solid rgba(255, 255, 255, 0.5);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+      background-color: rgba(255, 255, 255, 0.85);
+      margin-bottom: 30px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+      border-radius: 15px;
+      overflow: hidden;
+      transition: all 0.3s ease-in-out;
+    }
+
+    /* Hover Effect for Section */
+    .section:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+    }
+
+    .container {
+      width: 80%;
+      margin: 0 auto;
+    }
+
+    /* Section Titles */
+    h2 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      font-weight: 600;
+      color: #1E2A47;
+      animation: fadeInText 2s ease-in-out;
+    }
+
+    .section p {
+      font-size: 1.2rem;
+      color: #666;
+      line-height: 1.6;
+      animation: fadeInText 2s ease-in-out 0.5s;
+    }
+
+    /* Social Media Card Styling */
+    .social-cards {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 30px;
+    }
+
+    .card {
+      width: 90px;
+      height: 50px;
+      background: rgb(255, 255, 255);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px;
+      border-radius: 20px;
+      position: relative;
+      border: 2px solid transparent;
+      transition: all 0.5s ease-in-out;
+    }
+
+    .card:focus-within {
+      background-color: rgba(17, 17, 17, 0.5);
+      backdrop-filter: blur(10px);
+      border: 2px solid rgb(27, 27, 27);
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    }
+
+    .card button {
+      font-size: 34px;
+      background-color: transparent;
+      width: 50px;
+      padding: 7px;
+      height: 50px;
+      border-radius: 100%;
+      transition: all 0.2s ease-in;
+      border: 0;
+      cursor: pointer;
+    }
+
+    .card button:focus {
+      background-color: rgb(255, 255, 255);
+      margin-bottom: 50%;
+    }
+
+    /* Fade-in and Zoom-in animations */
+    @keyframes fadeInText {
+      0% { opacity: 0; transform: translateY(20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes zoomInText {
+      0% { transform: scale(0.8); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      background-color: #1E2A47;
+      color: white;
+      padding: 20px;
+    }
+
+    /* New Hire Me Button (Fixed to the right corner with smooth scroll and refined appearance) */
+    .hire-button {
+      position: fixed;
+      bottom: 30px;  /* Distance from the bottom */
+      right: 30px;   /* Distance from the right */
+      background-color: #000;  /* Μαύρο χρώμα φόντου */
+      color: white;
+      padding: 15px 30px;
+      border-radius: 50px;
+      font-size: 18px;
+      text-decoration: none;
+      font-weight: bold;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      transition: all 0.3s ease;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(100px);
+      transition: opacity 0.5s, visibility 0.5s, transform 0.5s;
+    }
+
+    .hire-button i {
+      margin-right: 10px; /* Κενό μεταξύ του εικονιδίου και του κειμένου */
+    }
+
+    /* Hover Effect */
+    .hire-button:hover {
+      background-color: #444; /* Σκούρο γκρι όταν περνάς το ποντίκι */
+      transform: translateY(-5px);
+    }
+
+    /* Make the button visible when the user scrolls down */
+    .hire-button.visible {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    /* Change color when clicked */
+    .hire-button.clicked {
+      background-color: #555; /* Γκρι χρώμα όταν το πατάς */
+      transform: scale(1.05); /* Ελαφριά αύξηση του μεγέθους */
+      transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+
+    /* Smooth scrolling effect */
+    html {
+      scroll-behavior: smooth;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Header Section -->
+<header>
+  <div class="container">
+    <h1>Welcome to My Portfolio <i class="fas fa-star"></i></h1>
+    <h2>Your Web Development Partner <i class="fas fa-cogs"></i></h2>
+  </div>
+</header>
+
+<!-- Hero Section -->
+<div class="hero-section">
+  <div class="hero-content">
+    <h1>Hi, I'm AceOfficial <i class="fas fa-user"></i></h1>
+    <img src="profile.png" alt="Profile Image" class="profile-img">
+    <p>I'm a passionate Web Developer <i class="fas fa-laptop-code"></i>, creating stunning and functional websites <i class="fas fa-globe"></i>.</p>
+  </div>
+</div>
+
+<!-- About Section -->
+<section class="section">
+  <div class="container">
+    <h2>About Me <i class="fas fa-info-circle"></i></h2>
+    <p>I specialize in front-end and back-end development, with a keen eye for modern design and performance. I work with the latest technologies to build dynamic websites and applications <i class="fas fa-code"></i>.</p>
+  </div>
+</section>
+
+<!-- Personal Info Section -->
+<section class="section" id="personal-info">
+  <div class="container">
+    <h2>Personal Info <i class="fas fa-id-card"></i></h2>
+    <p>I am 15 years old, based in Greece <i class="fas fa-flag"></i>, and have a vast knowledge of various web technologies. I am constantly learning <i class="fas fa-graduation-cap"></i> and improving my skills to provide the best solutions for my projects.</p>
+  </div>
+</section>
+
+<!-- Services Section -->
+<section class="section">
+  <div class="container">
+    <h2>My Services <i class="fas fa-cogs"></i></h2>
+    <p>From creating responsive websites to developing full-scale web applications, I offer a variety of services to meet your needs <i class="fas fa-hand-holding-heart"></i>:</p>
+    <ul>
+      <li><i class="fas fa-check-circle"></i> Responsive Web Design</li>
+      <li><i class="fas fa-check-circle"></i> Front-End Development (HTML, CSS, JavaScript)</li>
+      <li><i class="fas fa-check-circle"></i> Back-End Development (Node.js, PHP, Python)</li>
+      <li><i class="fas fa-check-circle"></i> SEO Optimization</li>
+      <li><i class="fas fa-check-circle"></i> E-commerce Solutions</li>
+      <li><i class="fas fa-check-circle"></i> Website Maintenance and Support</li>
+    </ul>
+  </div>
+</section>
+
+<!-- Contact Section -->
+<section id="contact" class="section">
+  <div class="container">
+    <h2>Contact Me <i class="fas fa-envelope"></i></h2>
+    <div class="social-cards">
+      <div class="card">
+        <button><a href="https://discord.com/users/aace2009" target="_blank"><i class="fab fa-discord"></i></a></button>
+      </div>
+      <div class="card">
+        <button><a href="https://t.me/CIAGOR" target="_blank"><i class="fab fa-telegram"></i></a></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer Section -->
+<footer>
+  <p>&copy; 2024 AceOfficial - All Rights Reserved <i class="fas fa-copyright"></i></p>
+</footer>
+
+<!-- Hire Me Button -->
+<a href="#contact" class="hire-button" id="hire-button">
+  <i class="fas fa-shopping-cart"></i> Hire Me
+</a>
+
+<script>
+  // Show the "Hire Me" button when scrolling
+  window.addEventListener("scroll", function() {
+    var hireButton = document.getElementById("hire-button");
+    if (window.scrollY > 100) {
+      hireButton.classList.add("visible");
+    } else {
+      hireButton.classList.remove("visible");
+      hireButton.classList.remove("clicked"); // Επαναφορά του χρώματος στο μαύρο
+    }
+  });
+
+  // Add the animation and color change when the "Hire Me" button is clicked
+  document.getElementById("hire-button").addEventListener("click", function() {
+    var hireButton = document.getElementById("hire-button");
+    hireButton.classList.add("clicked"); // Προσθήκη της κλάσης clicked
+    setTimeout(function() {
+      hireButton.classList.remove("clicked"); // Αφαίρεση της κλάσης clicked μετά την κινούμενη αλλαγή χρώματος
+    }, 300); // Διάρκεια της animation
+  });
+</script>
+
+</body>
+  </html>
